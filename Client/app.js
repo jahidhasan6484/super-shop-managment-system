@@ -40,14 +40,12 @@ function deleteRowById(id) {
 function handleEditRow(id) {
     const updateSection = document.querySelector('#update-row');
     updateSection.hidden = false;
-    document.querySelector('#update-name-input').dataset.id = id;
+    document.querySelector('#update-price-input').dataset.id = id;
 }
 
 updateBtn.onclick = function() {
-    const updateNameInput = document.querySelector('#update-name-input');
+    const updatePriceInput = document.querySelector('#update-price-input');
 
-
-    console.log(updateNameInput);
 
     fetch('http://localhost:5000/update', {
         method: 'PATCH',
@@ -55,8 +53,8 @@ updateBtn.onclick = function() {
             'Content-type' : 'application/json'
         },
         body: JSON.stringify({
-            id: updateNameInput.dataset.id,
-            name: updateNameInput.value
+            id: updatePriceInput.dataset.id,
+            price: updatePriceInput.value
         })
     })
     .then(response => response.json())
@@ -68,19 +66,27 @@ updateBtn.onclick = function() {
 }
 
 
-const addBtn = document.querySelector('#add-name-btn');
+const addBtn = document.querySelector('#add-btn');
 
 addBtn.onclick = function () {
     const nameInput = document.querySelector('#name-input');
     const name = nameInput.value;
     nameInput.value = "";
 
+    const categoryInput = document.querySelector('#category-input');
+    const category = categoryInput.value;
+    categoryInput.value = "";
+
+    const priceInput = document.querySelector('#price-input');
+    const price = priceInput.value;
+    priceInput.value = "";
+
     fetch('http://localhost:5000/insert', {
         headers: {
             'Content-type': 'application/json'
         },
         method: 'POST',
-        body: JSON.stringify({ name : name})
+        body: JSON.stringify({ name : name, category : category, price : price})
     })
     .then(response => response.json())
     .then(data => insertRowIntoTable(data['data']));
@@ -119,19 +125,21 @@ function loadHTMLTable(data) {
     const table = document.querySelector('table tbody');
 
     if (data.length === 0) {
-        table.innerHTML = "<tr><td class='no-data' colspan='5'>No Data</td></tr>";
+        table.innerHTML = "<tr><td class='no-data' colspan='7'>No Data</td></tr>";
         return;
     }
 
     let tableHtml = "";
 
-    data.forEach(function ({id, name, date_added}) {
+    data.forEach(function ({id, name, category, price, date_added}) {
         tableHtml += "<tr>";
         tableHtml += `<td>${id}</td>`;
         tableHtml += `<td>${name}</td>`;
+        tableHtml += `<td>${category}</td>`;
+        tableHtml += `<td>TK.${price}</td>`;
         tableHtml += `<td>${new Date(date_added).toLocaleString()}</td>`;
         tableHtml += `<td><button class="delete-row-btn" data-id=${id}>Delete</td>`;
-        tableHtml += `<td><button class="edit-row-btn" data-id=${id}>Edit</td>`;
+        tableHtml += `<td><button class="edit-row-btn" data-id=${id}>Update</td>`;
         tableHtml += "</tr>";
     });
 

@@ -13,10 +13,10 @@ app.use(express.urlencoded({ extended : false }));
 
 // create
 app.post('/insert', (request, response) => {
-    const { name } = request.body;
+    const { name, category, price } = request.body;
     const db = dbService.getDbServiceInstance();
     
-    const result = db.insertNewName(name);
+    const result = db.insertNewProduct(name, category, price);
 
     result
     .then(data => response.json({ data: data}))
@@ -36,10 +36,10 @@ app.get('/getAll', (request, response) => {
 
 // update
 app.patch('/update', (request, response) => {
-    const { id, name } = request.body;
+    const { id, price } = request.body;
     const db = dbService.getDbServiceInstance();
 
-    const result = db.updateNameById(id, name);
+    const result = db.updatePriceById(id, price);
     
     result
     .then(data => response.json({success : data}))
@@ -69,4 +69,4 @@ app.get('/search/:name', (request, response) => {
     .catch(err => console.log(err));
 })
 
-app.listen(process.env.PORT, () => console.log('app is running'));
+app.listen(process.env.PORT);

@@ -6,35 +6,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
+  
   <main>
-    <label>Name:</label>
-    <input type="text" id="name-input">
-    <button id="add-name-btn">Add Name</button>
+    <header>
+      <h1 class="mt-5 mb-5">MLX Super Shop</h1>
+      <form class="mb-5">
+        <input placeholder="Search by product name" id="search-input" class="form-control">
+        <br>
+        <button id="search-btn" class="btn btn-success">Search</button>
+     </form>
+    </header>
+    <form>
+      <h3 class="mt-5 mb-5">Add New Product</h3>
+      <label>Product Name:</label>
+      <input type="text" id="name-input" class="form-control">
+      <label>Category:</label>
+      <input type="text" id="category-input" class="form-control">
+      <label>Price:</label>
+      <input type="text" id="price-input" class="form-control">
+      <br>
+      <button id="add-btn" class="btn btn-success">Add Product</button>
+    </form>
 
     <br><br><br>
-    <div>
-       <input placeholder="search by name" id="search-input">
-       <button id="search-btn">Search</button>
-    </div>
 
-    <table id="table">
-        <thead>
-            <th>ID</th>
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
             <th>Name</th>
-            <th>Date Added</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Added Date</th>
             <th>Delete</th>
-            <th>Edit</th>
-        </thead>
-        <tbody></tbody>
+            <th>Update Price</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+      </tbody>
     </table>
 
-    <section hidden id="update-row">
-        <label>Name:</label>
-        <input type="text" id="update-name-input">
-        <button id="update-row-btn">Update</button>
+    <section hidden id="update-row" class="mb-5">
+        <label>Price:</label>
+        <input type="text" id="update-price-input" class="form-control">
+        <br>
+        <button id="update-row-btn" class="btn btn-primary">Update</button>
     </section>
+    <footer class="mt-5 mb-5">
+      <h5>All rights reserved by MLX Super Shop 2021</h5>
+    </footer>
 </main>
 <script src="app.js"></script>
 </body>
