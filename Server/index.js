@@ -69,4 +69,4 @@ app.get('/search/:name', (request, response) => {
     .catch(err => console.log(err));
 })
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || port);
